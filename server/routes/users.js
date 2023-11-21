@@ -10,6 +10,16 @@ import usersController from "./../controllers/usersController.js"
 const router = express.Router()
 
 // 3.CONTROLADORES
+
+/**
+ * @swagger
+ * /api/v1/users:
+ *   get:
+ *     summary: Obtener todos los usuarios
+ *     tags:
+ *       - Usuarios
+ */
+
 router.get("/", usersController.readAll)
 
 // 4.EXPORTACIONES
