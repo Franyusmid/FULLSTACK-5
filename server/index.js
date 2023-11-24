@@ -12,6 +12,7 @@ import { fileURLToPath } from "url"
 // B. importaciones de Archivos
 
 import usersRoute from "./routes/users.js"
+import breaksRoute from "./routes/breakers.js"
 
 // 2.INICIALIZADORES
 const app = express()
@@ -41,6 +42,7 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 // 3. RUTAS
 // A. APLICACION
 app.use("/api/v1/users", usersRoute)
+app.use("/api/v1/breakers", breaksRoute)
 
 // B.DOCUMENTACION
 app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
