@@ -19,3 +19,4 @@
 -dotenv:Sirve para realizar la conexion de las variables de entorno con el server.
 -SwaggerUI: sirve para generar la pagina
 -SwaggerJSDoc: para la logica o documentacion
+-mongoose db: se utiliza para poder conectar le server con la base de datos

@@ -13,12 +13,14 @@ import { fileURLToPath } from "url"
 
 import usersRoute from "./routes/users.js"
 import breaksRoute from "./routes/breakers.js"
+import connectDB from "./config/db.js"
 
 // 2.INICIALIZADORES
 const app = express()
 app.use(cors())
 app.use(express.json())
 dotenv.config()
+connectDB()
 
 const _filename = fileURLToPath(import.meta.url)
 const _dirname = dirname(_filename)
