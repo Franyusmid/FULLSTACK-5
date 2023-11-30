@@ -19,8 +19,22 @@ const router = express.Router()
  *     tags:
  *       - Usuarios
  */
-
+// A. OBTENER UN BREAKER
 router.get("/", breakersController.readAll)
+
+// B.CREAR BREAKER
+router.post("/create", breakersController.create)
+
+// C. OBTENER UN BREAKER ESPECIFICO
+
+router.get("/reaOne/:id", breakersController.readOne)
+
+// D.MODIFICAR UN BREAKER
+
+router.put("/updateone/:id", breakersController.edit)
+
+// E.BORRAR UN BREAKER
+router.delete("/deleteone/:id", breakersController.deleteone)
 
 // 4.EXPORTACIONES
 
