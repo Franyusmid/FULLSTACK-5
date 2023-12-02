@@ -19,8 +19,16 @@ const router = express.Router()
  *     tags:
  *       - Usuarios
  */
-
+// A. LEER USUARIOS
 router.get("/", usersController.readAll)
+
+// B.LEER UN USUARIO
+
+router.get("/readone/:id", usersController.readOne)
+
+// c.CREAR UN USUARIO
+
+router.post("/create", usersController.create)
 
 // 4.EXPORTACIONES
 

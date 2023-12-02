@@ -14,6 +14,7 @@ import { fileURLToPath } from "url"
 import usersRoute from "./routes/users.js"
 import breaksRoute from "./routes/breakers.js"
 import connectDB from "./config/db.js"
+import fusesRoute from "./routes/fuses.js"
 
 // 2.INICIALIZADORES
 const app = express()
@@ -45,6 +46,7 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 // A. APLICACION
 app.use("/api/v1/users", usersRoute)
 app.use("/api/v1/breakers", breaksRoute)
+app.use("/api/v1/fuses", fusesRoute)
 
 // B.DOCUMENTACION
 app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocs))

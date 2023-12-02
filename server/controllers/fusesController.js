@@ -1,37 +1,33 @@
-import Breaker from "../models/Breaker.js" /* se importa el modelo */
+import Fuse from "../models/Fuses.js"
+/* se importa el modelo */
 
 const readAll = async (req, res) => {
   try {
-    const breakers = await Breaker.find()
-    console.log(breakers)
+    const fuses = await Fuse.find()
+
     return res.json({
-      message: "Datos de los breakers obtenidos con exito",
-      data: breakers,
+      message: "Datos de los Fusibles obtenidos con exito",
+      data: fuses,
     })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      msg: "Hubo un erro obteniendo los datos",
-    })
-  }
+  } catch (error) {}
 }
 
 const readOne = async (req, res) => {
   const { id } = req.params
 
   try {
-    const breaker = await Breaker.findOne({
+    const fuse = await Fuse.findOne({
       _id: id,
     })
     console.log(id)
-    if (!breaker) {
+    if (!fuse) {
       return res.status(400).json({
-        msg: "Breaker no encontrado",
+        msg: "Fusible no encontrado",
       })
     }
-    return res.json({
-      msg: "Breaker encontrado con exito",
-      data: breaker,
+    res.json({
+      msg: "Fusible encontrado con exito",
+      data: fuse,
     })
   } catch (error) {
     console.log(error)
@@ -42,18 +38,22 @@ const readOne = async (req, res) => {
 }
 const create = async (req, res) => {
   try {
-    const { name } = req.body
-    const newBreaker = await Breaker.create({
+    const { name, price, image, availability, slug } = req.body
+    const newFuse = await Fuse.create({
       name,
+      price,
+      image,
+      availability,
+      slug,
     })
     return res.json({
-      msg: "Breaker Creado",
-      data: newBreaker,
+      msg: "Fusible Creado",
+      data: newFuse,
     })
   } catch (error) {
     console.log(error)
     res.status(500).json({
-      msg: "Hubo un erro obteniendo los datos",
+      msg: "Hubo un error obteniendo los datos",
     })
   }
 }
@@ -63,7 +63,7 @@ const edit = async (req, res) => {
   const { name } = req.body
 
   try {
-    const updatedBreaker = await Breaker.findByIdAndUpdate(
+    const updatedFuse = await Fuse.findByIdAndUpdate(
       id,
       {
         name,
@@ -72,13 +72,13 @@ const edit = async (req, res) => {
     )
 
     return res.json({
-      msg: "Breaker modificado con exito",
-      data: updatedBreaker,
+      msg: "Fusible modificado con exito",
+      data: updatedFuse,
     })
-  } catch (eror) {
+  } catch (error) {
     console.log(error)
     res.status(500).json({
-      msg: "Hubo un erro obteniendo los datos",
+      msg: "Hubo un error obteniendo los datos",
     })
   }
 }
@@ -86,19 +86,19 @@ const edit = async (req, res) => {
 const deleteone = async (req, res) => {
   const { id } = req.params
   try {
-    const deleteBreaker = await Breaker.findByIdAndDelete({
+    const deleteFuse = await Fuse.findByIdAndDelete({
       _id: id,
     })
 
-    if (deleteBreaker === null) {
+    if (deleteFuse === null) {
       return res.json({
-        msg: "El braker no exixte o fue borrado con anterioridad",
+        msg: "El Fusible no existe o fue borrado con anterioridad",
       })
     }
 
     return res.json({
-      msg: "Breaker eliminado",
-      data: deleteBreaker,
+      msg: "Fusible eliminado",
+      data: deleteFuse,
     })
   } catch (error) {
     console.log(error)
