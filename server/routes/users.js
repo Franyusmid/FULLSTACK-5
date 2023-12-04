@@ -1,6 +1,7 @@
 // 1.Importaciones
 // A.librerias
 import express from "express"
+import authorization from "./../middleware/authotization.js"
 
 // B.ARCHIVOS
 import usersController from "./../controllers/usersController.js"
@@ -30,6 +31,13 @@ router.get("/readone/:id", usersController.readOne)
 
 router.post("/create", usersController.create)
 
+//  D. AUTENTICAR USUARIO
+router.post("/login", usersController.login)
+
+// E. AUTORIZACIÓN DE USUARIO
+// INTEGRACIÓN DE MIDDLEWARES
+
+router.get("/verifytoken", authorization, usersController.verifyToken)
 // 4.EXPORTACIONES
 
 export default router
