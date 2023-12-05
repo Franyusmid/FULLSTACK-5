@@ -10,7 +10,6 @@ const breakerSchema = mongoose.Schema({
     required: true,
   },
 })
-
 // 3.Modelos
 const Breaker = mongoose.model("Breaker", breakerSchema)
 

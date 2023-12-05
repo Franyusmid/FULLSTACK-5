@@ -45,7 +45,7 @@ const readOne = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const { name, lastName, email, password } = req.body
+    const { name, email, password } = req.body
 
     const salt = await bcryptjs.genSalt(10)
 
@@ -53,7 +53,6 @@ const create = async (req, res) => {
 
     const newUser = await User.create({
       name,
-      lastName,
       email,
       password: hashedPassword,
     })
