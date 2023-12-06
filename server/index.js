@@ -15,6 +15,7 @@ import usersRoute from "./routes/users.js"
 import breaksRoute from "./routes/breakers.js"
 import connectDB from "./config/db.js"
 import fusesRoute from "./routes/fuses.js"
+import checkoutRoute from "./routes/checkout.js"
 
 // 2.INICIALIZADORES
 const app = express()
@@ -47,6 +48,7 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 app.use("/api/v1/users", usersRoute)
 app.use("/api/v1/breakers", breaksRoute)
 app.use("/api/v1/fuses", fusesRoute)
+app.use("/api/v1/checkout", checkoutRoute)
 
 // B.DOCUMENTACION
 app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
