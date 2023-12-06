@@ -51,7 +51,6 @@ const breakerSchema = mongoose.Schema({
     unique: true,
   },
 })
-
 // 3.Modelos
 const Breaker = mongoose.model("Breaker", breakerSchema)
 
