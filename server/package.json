@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "stripeclick": "stripe listen --forward-to localhost:3005/api/v1/checkout/create-order"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.1",
     "nodemon": "^3.0.1",
-    "stripe": "^14.7.0",
+    "stripe": "^14.8.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   }

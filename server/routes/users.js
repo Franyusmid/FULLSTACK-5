@@ -1,43 +1,36 @@
-// 1.Importaciones
-// A.librerias
+// 1. IMPORTACIONES
+// A. LIBRERÍAS
 import express from "express"
-import authorization from "./../middleware/authotization.js"
-
-// B.ARCHIVOS
+import authorization from "./../middleware/authorization.js"
+// B. ARCHIVOS
 import usersController from "./../controllers/usersController.js"
 
-// 2.INICIALIZADORES
-
+// 2. INICIALIZADORES
 const router = express.Router()
 
-// 3.CONTROLADORES
+// 3. CONTROLADORES
 
 /**
  * @swagger
  * /api/v1/users:
- *   get:
- *     summary: Obtener todos los usuarios
- *     tags:
- *       - Usuarios
+ *  get:
+ *      summary: Obtener todos los usuarios
+ *      tags: [Usuarios]
  */
 // A. LEER USUARIOS
 router.get("/", usersController.readAll)
 
-// B.LEER UN USUARIO
+// B. LEER UN USUARIO
 
-router.get("/readone/:id", usersController.readOne)
-
-// c.CREAR UN USUARIO
-
+// C. CREAR USUARIO
 router.post("/create", usersController.create)
 
-//  D. AUTENTICAR USUARIO
+// D. AUTENTICAR USUARIO (LOGIN)
 router.post("/login", usersController.login)
 
 // E. AUTORIZACIÓN DE USUARIO
 // INTEGRACIÓN DE MIDDLEWARES
-
 router.get("/verifytoken", authorization, usersController.verifyToken)
-// 4.EXPORTACIONES
 
+// 4. EXPORTACIÓN
 export default router

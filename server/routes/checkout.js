@@ -3,7 +3,7 @@
 import express from "express"
 import checkoutController from "../controllers/checkoutController.js"
 import bodyParser from "body-parser"
-import authorization from "./../middleware/authotization.js"
+import authorization from "./../middleware/authorization.js"
 
 const router = express.Router()
 

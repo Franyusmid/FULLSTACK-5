@@ -27,7 +27,7 @@ router.post("/create", breakersController.create)
 
 // C. OBTENER UN BREAKER ESPECIFICO
 
-router.get("/reaOne/:id", breakersController.readOne)
+router.get("/readone/:id", breakersController.readone)
 
 // D.MODIFICAR UN BREAKER
 

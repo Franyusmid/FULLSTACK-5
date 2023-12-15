@@ -20,7 +20,6 @@ import checkoutRoute from "./routes/checkout.js"
 // 2.INICIALIZADORES
 const app = express()
 app.use(cors())
-app.use(express.json())
 dotenv.config()
 connectDB()
 
@@ -44,7 +43,20 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions)
 // opcinal
 
 // 3. RUTAS
-// A. APLICACION
+
+// A.WEBHOOKS
+app.use((req, res, next) => {
+  if (req.originalUrl === "/api/v1/checkout/create-order") {
+    next()
+  } else {
+    express.json()(req, res, next)
+  }
+})
+
+// B. APLICACIÓN
+// PROD: https://midominio.com/
+// DEV: localhost:3005/
+
 app.use("/api/v1/users", usersRoute)
 app.use("/api/v1/breakers", breaksRoute)
 app.use("/api/v1/fuses", fusesRoute)

@@ -1,71 +1,51 @@
-import User from "../models/User.js"
+import User from "./../models/User.js"
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
+import Cart from "./../models/Cart.js"
 
-const readAll = async (req, res) => {
-  try {
-    const users = await User.find()
-    console.log(users)
-    return res.json({
-      message: "Datos obtenidos con exito",
-      data: users,
-    })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      msg: "Hubo un error obteniendo los datos",
-    })
-  }
-}
-
-const readOne = async (req, res) => {
-  const { id } = req.params
-
-  try {
-    const user = await User.findOne({
-      _id: id,
-    })
-    console.log(id)
-    if (!user) {
-      return res.status(400).json({
-        msg: "Usuario no encontrado",
-      })
-    }
-    return res.json({
-      msg: "Usurio encontrado con exito",
-      data: user,
-    })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      msg: "Hubo un erro obteniendo los datos",
-    })
-  }
+const readAll = (req, res) => {
+  res.json({
+    message: "Datos obtenidos con éxito.",
+    data: data,
+  })
 }
 
 const create = async (req, res) => {
-  try {
-    const { name, email, password } = req.body
+  const { name, lastname, country, address, zipcode, email, password } =
+    req.body
 
+  try {
+    // 1. CAPA DE CONTRASEÑA
+    // ESTABLECER EL NIVEL DE DIFICULTAD DE ENCRIPTAMIENTO DEL PASSWORD
     const salt = await bcryptjs.genSalt(10)
 
+    // 1A. CREAR CARRITO DE COMPRAS
+    const newCart = await Cart.create({})
+
+    // ENCRIPTAR EL PASSWORD
     const hashedPassword = await bcryptjs.hash(password, salt)
+    console.log("hashedPassword", hashedPassword)
 
     const newUser = await User.create({
       name,
+      lastname,
+      country,
+      address,
+      zipcode,
       email,
       password: hashedPassword,
+      cart: newCart,
     })
+
     // CAPA DE SEGURIDAD JWT
-    //1.GENERA UNA ELECCION DE DATSO (ID)-PAYLOAD
+    // 1. GENERAR UNA ELECCIÓN DE DATOS (ID) - PAYLOAD
     const payload = {
       user: {
         id: newUser._id,
       },
     }
 
-    // 2.ESTABLECER LA FIRMA JWT(SUPER SECRETA.SOLO LA TIENE EL CLIENTE Y EL SERVER)
-
+    // 2. ESTABLECER LA FIRMA JWT (SUPER SECRETA. SOLO LA TIENE EL CLIENTE Y EL SERVER)
     return jwt.sign(
       payload,
       process.env.JWT_SECRET,
@@ -74,19 +54,21 @@ const create = async (req, res) => {
       },
       (error, token) => {
         if (error) {
-          console.log("errr", error)
+          console.log("error", error)
           return new Error(error)
         }
+
         return res.json({
-          msg: "usurio Creado con exito y encriptado",
+          msg: "Usuario creado con éxito y super seguro.",
           data: token,
         })
       }
     )
   } catch (error) {
     console.log(error)
-    res.status(500).json({
-      msg: "Hubo un error obteniendo los datos o el usuario esta creado",
+    return res.status(500).json({
+      msg: "Hubo un problema en el servidor",
+      error,
     })
   }
 }
@@ -155,7 +137,7 @@ const login = async (req, res) => {
 const verifyToken = async (req, res) => {
   try {
     console.log("req.user", req.user)
-    const foundUser = await User.findById(req.user.id).select("-password")
+    const foundUser = await User.findById(req.user.id)
     console.log("foundUser", foundUser)
 
     return res.json({
@@ -169,10 +151,10 @@ const verifyToken = async (req, res) => {
     })
   }
 }
+
 export default {
   readAll,
   create,
-  readOne,
   login,
   verifyToken,
 }

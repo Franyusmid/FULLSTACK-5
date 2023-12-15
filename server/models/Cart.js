@@ -30,7 +30,7 @@ const cartSchema = mongoose.Schema({
         required: true,
       },
       img: {
-        type: Array,
+        type: String,
       },
       slug: {
         type: String,

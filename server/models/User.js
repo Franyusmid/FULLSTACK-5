@@ -1,13 +1,35 @@
-// 1.Importacion
-
+// ./server/models/User.js
 import mongoose from "mongoose"
-
-// 2.shema o equema
 
 const userSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
+  },
+  lastname: {
+    type: String,
+    required: true,
+  },
+  cart: {
+    type: mongoose.Types.ObjectId,
+    ref: "Cart",
+    default: [],
+  },
+  country: {
+    type: String,
+    default: "",
+  },
+  address: {
+    type: String,
+    default: "",
+  },
+  zipcode: {
+    type: String,
+    default: "00000",
+  },
+  receipts: {
+    type: Array,
+    default: [],
   },
   email: {
     type: String,
@@ -20,9 +42,6 @@ const userSchema = mongoose.Schema({
   },
 })
 
-// 3.Modelos
-const User = mongoose.model("user", userSchema)
-
-// 4.Expotacion
+const User = mongoose.model("User", userSchema)
 
 export default User

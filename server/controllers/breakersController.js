@@ -5,7 +5,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const stripeKey = stripe(process.env.STRIPE_SECRET_KEY)
-
+// console.log("stripekey", stripeKey)
 const readAll = async (req, res) => {
   try {
     const breakers = await Breaker.find()
@@ -22,12 +22,12 @@ const readAll = async (req, res) => {
   }
 }
 
-const readOne = async (req, res) => {
+const readone = async (req, res) => {
   const { id } = req.params
 
   try {
     const breaker = await Breaker.findOne({
-      _id: id,
+      slug: id,
     })
     console.log(id)
     if (!breaker) {
@@ -49,7 +49,7 @@ const readOne = async (req, res) => {
 const create = async (req, res) => {
   const { name, currency, prices, img, description, slug } = req.body
 
-  console.log(req.body)
+  // console.log(req.body)
 
   // A. GENERACIÓN DE PRODUCTO EN STRIPE
   // 1. CREAR EL PRODUCTO EN STRIPE
@@ -83,7 +83,7 @@ const create = async (req, res) => {
       })
     )
 
-    console.log("stripePrices", stripePrices)
+    // console.log("stripePrices", stripePrices)
 
     // 3. CREACIÓN DE PRODUCTO EN BASE DE DATOS
     // A. ADAPTACIÓN DE VARIABLE. EN LUGAR DE PASAR LOS 50 MIL PROPIEDADES. SOLO NECESITO 4 PARA LA BASE DE DATOS CON RESPECTO A PRICING.
@@ -114,6 +114,10 @@ const create = async (req, res) => {
     })
   } catch (error) {
     console.log("error", error)
+    return res.status(500).json({
+      msg: "Hubo un problema creando el breaker",
+      error,
+    })
   }
 }
 
@@ -170,7 +174,7 @@ const deleteone = async (req, res) => {
 export default {
   readAll,
   create,
-  readOne,
+  readone,
   edit,
   deleteone,
 }

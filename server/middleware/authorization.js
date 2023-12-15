@@ -12,8 +12,11 @@ const decrypt = async (req, res, next) => {
   }
 
   try {
+    console.log("token", token)
+    console.log("secret", process.env.JWT_SECRET)
     // TOKEN DESENCRIPTADO
     const openToken = await jwt.verify(token, process.env.JWT_SECRET)
+    console.log("openToken", openToken)
 
     // PASARLO EN EL REQ.USER (req.body extensión)
     req.user = openToken.user
