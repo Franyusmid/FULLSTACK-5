@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom"
 import { useEffect, useContext } from "react"
 import { useCart } from "../../hooks/useCart"
-import { Link } from "react-router-dom"
 import UserContext from "../../context/User/UserContext"
+import CartIndex from "../../components/cart/index"
 
 export default function Cart() {
   const userCtx = useContext(UserContext)
@@ -21,6 +22,11 @@ export default function Cart() {
   return (
     <div>
       <div>
+        <CartIndex
+          products={cart}
+          handleChange={handleChange}
+          handleRemove={handleRemove}
+        />
         <ul>
           {cart.map((e) => {
             return (

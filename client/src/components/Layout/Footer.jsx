@@ -1,7 +1,12 @@
 // ./src/components/Layout/Footer.jsx
+import IndexFooter from "../../components/Footer/index"
 
 function Footer() {
-  return <div>Footer</div>
+  return (
+    <div>
+      <IndexFooter />
+    </div>
+  )
 }
 
 export default Footer

@@ -1,4 +1,3 @@
-import { iniciarSesion } from "../../pages/iniciar-sesion/index"
 export default function Example(handleChange) {
   return (
     <>

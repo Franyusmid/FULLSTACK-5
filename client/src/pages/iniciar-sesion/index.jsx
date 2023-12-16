@@ -3,7 +3,6 @@
 import { useState, useContext } from "react"
 import UserContext from "../../context/User/UserContext"
 import Button from "../../components/Molecules/Button"
-import { iniciarSesion } from "../../pages/iniciar-sesion/index"
 
 function Login() {
   const [user, setUser] = useState({
@@ -29,7 +28,6 @@ function Login() {
 
   return (
     <div>
-      <iniciarSesion handleChange={handleChange} />
       <form onSubmit={handleSubmit}>
         <div>
           <label>Correo electrónico</label>
